@@ -3,8 +3,10 @@
 
 /* defined constants */
 #define MAXOP   100     /* max size of operand or operator */
-enum OpType { NONE, NUMBER, VAR, SIN, COS, TAN, ASIN, ACOS, ATAN, EXP, LOG,
-	SQRT, CEIL, FLOOR, ABS, CUSTVARMAX };
+/* start at 256 to ensure not conflicting with ascii or ascii extended
+ * character set */
+enum OpType { NONE = 256, NUMBER, VAR, SIN, COS, TAN, ASIN, ACOS, ATAN, EXP,
+	LOG, SQRT, CEIL, FLOOR, ABS, CUSTVARMAX };
 
 /* function definitions */
 extern int getop(char []);
