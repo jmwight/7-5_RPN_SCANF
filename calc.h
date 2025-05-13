@@ -9,7 +9,7 @@ enum OpType { NONE = 256, NUMBER, VAR, SIN, COS, TAN, ASIN, ACOS, ATAN, EXP,
 	LOG, SQRT, CEIL, FLOOR, ABS, CUSTVARMAX };
 
 /* function definitions */
-extern int getop(char []);
+extern int getop(double*);
 extern void push(double);
 extern double pop(void);
 extern double ptop(void);
@@ -22,5 +22,7 @@ extern void ungets(char*);
 
 /* global custom variables a-z user can set */
 extern int cust_var[/*CUSTVARMAX*/];
+
+#include "readwritelines/getaline.h"
 
 #endif // CALC_H
