@@ -21,3 +21,15 @@ int getop(double *d)
 
 	//if(sscanf("%c", c)
 }
+
+/* findnxtstart: finds next start position of a func/num/operator */
+char *findnxtstart(char *pos)
+{
+	while(isspace(*pos) && *pos != '\0')
+		pos++;
+	while(!isspace(*pos) && *pos != '\0')
+		pos++;
+	while(isspace(*pos) && *pos != '\0')
+		pos++;
+	return pos;
+}
