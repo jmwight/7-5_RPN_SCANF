@@ -8,7 +8,13 @@ int getaline(char *s, int mxlen)
 		;
 
 	if(*s == EOF)
+	{
 		*s = '\0';
+		if(l == 0)
+			return EOF;
+		else
+			ungetc(*s, stdin);
+	}
 	else if(*s == '\n')
 	{
 		*++s = '\0';
