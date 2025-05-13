@@ -23,6 +23,7 @@ int getop(double *d)
 	{
 		getnxtstart(bufp);
 		int l = strlen(op);
+		bufp += l; /* speed optimization to save */
 		if(l == 1)
 		{
 			switch(op[0])
@@ -41,7 +42,31 @@ int getop(double *d)
 				printf("Error: invalid operator\n");
 				return EOF;
 			}
-		} 
+		}
+		else if(strcmp(op, "sin"))
+			return SIN;
+		else if(strcmp(op, "cos"))
+			return COS;
+		else if(strcmp(op, "tan"))
+			return TAN;
+		else if(strcmp(op, "asin"))
+			return ASIN;
+		else if(strcmp(op, "acos"))
+			return ACOS;
+		else if(strcmp(op, "atan"))
+			return ATAN;
+		else if(strcmp(op, "exp"))
+			return EXP;
+		else if(strcmp(op, "log"))
+			return LOG;
+		else if(strcmp(op, "sqrt"))
+			return SQRT;
+		else if(strcmp(op, "ceil"))
+			return CEIL;
+		else if(strcmp(op, "flr"))
+			return FLOOR;
+		else if(strcmp(op, "abs"))
+			return ABS;
 		/* TODO: do comparisons like to check for operators,
 		 * functions, setting a variable, recalling, etc. and return
 		 * appropriate */
