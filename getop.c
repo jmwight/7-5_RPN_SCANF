@@ -22,6 +22,26 @@ int getop(double *d)
 	else if(sscanf("%s", op))
 	{
 		getnxtstart(bufp);
+		int l = strlen(op);
+		if(l == 1)
+		{
+			switch(op[0])
+			{
+			case '+':
+			case '-':
+			case '*':
+			case '/':
+			case '%':
+			case '?':
+			case '!':
+			case '@':
+				return op[0];
+				break;
+			default:
+				printf("Error: invalid operator\n");
+				return EOF;
+			}
+		} 
 		/* TODO: do comparisons like to check for operators,
 		 * functions, setting a variable, recalling, etc. and return
 		 * appropriate */
