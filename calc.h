@@ -3,21 +3,8 @@
 
 /* defined constants */
 #define MAXOP   100     /* max size of operand or operator */
-#define NUMBER  '0'     /* signal that a number was found */
-#define VAR     '1'     /* we are setting a variable */
-#define SIN     256
-#define COS     257
-#define TAN     258
-#define ASIN    259
-#define ACOS    260
-#define ATAN    261
-#define EXP     262
-#define LOG     263
-#define SQRT    264
-#define CEIL    265
-#define FLOOR   266
-#define ABS     267
-#define CUSTVARMAX   26
+enum OpType { NONE, NUMBER, VAR, SIN, COS, TAN, ASIN, ACOS, ATAN, EXP, LOG,
+	SQRT, CEIL, FLOOR, ABS, CUSTVARMAX };
 
 /* function definitions */
 extern int getop(char []);

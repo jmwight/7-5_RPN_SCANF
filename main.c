@@ -9,14 +9,14 @@ int cust_var[CUSTVARMAX];
 /* reverse Polish calculator */
 int main()
 {
-    int type, type_prev;
-    type_prev = -1;
+    enum OpType curtype, prevtype;
+    prevtype = NONE;
     double op2;
     char s[MAXOP];
 
-    while((type = getop(s)) != EOF)
+    while((curtype = getop(s)) != EOF)
     {
-        switch(type)
+        switch(curtype)
         {
         case NUMBER:
             push(atof(s));
@@ -43,7 +43,7 @@ int main()
             push((int)pop() % (int)op2);
             break;
         case '\n':
-            if(type_prev == type)
+            if(prevtype == curtype)
                 printf("\t%.8g\n", pop());
             break;
         /** Stack operations. Key:
@@ -193,7 +193,7 @@ int main()
         }
         /* this is a variable to keep track if enter got hit twice so we only print calculated
          * value if it it gets hit twice */
-        type_prev = type;
+        prevtype = curtype;
     }
 
     return 0;
