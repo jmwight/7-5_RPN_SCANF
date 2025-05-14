@@ -24,27 +24,36 @@ int getop(double *d)
 	}
 	else if(sscanf(bufp, "%s", op) == 1)
 	{
-		bufp = findnxtstart(bufp);
 		int l = strlen(op);
 		//bufp += l; /* speed optimization to save */
 		if(l == 1)
 		{
-			switch(op[0])
-			{
-			case '+':
-			case '-':
-			case '*':
-			case '/':
-			case '%':
-			case '?':
-			case '!':
-			case '@':
+			/* test if math / general calculator operator and if so
+			 * return it */
+			char *oploc;
+			/* will be null pointer if not found */
+			oploc = strchr("+-*/%?!@", (int)op[0]);
+			if(oploc == NULL)
 				return op[0];
-				break;
-			default:
+			else if(op[0] >= 'a' && op[0] <= 'z')
+			{
+				char var = op[0];
+				if(sscanf(bufp, "%s %lf", op, d) == 2 &&
+						strlen(op) == 1 &&
+						op[0] == '=')
+				{
+					cust_var[var - 'a'] = *d;
+					return NUMBER;
+				}
+				else
+					return var;
+			}
+			else
+			{
 				printf("Error: invalid operator\n");
 				return EOF;
 			}
+
 		}
 		else if(strcmp(op, "sin"))
 			return SIN;
@@ -70,6 +79,8 @@ int getop(double *d)
 			return FLOOR;
 		else if(strcmp(op, "abs"))
 			return ABS;
+
+		bufp = findnxtstart(bufp);
 		/* TODO: do comparisons like to check for operators,
 		 * functions, setting a variable, recalling, etc. and return
 		 * appropriate */
