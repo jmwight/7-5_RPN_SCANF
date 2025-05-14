@@ -24,6 +24,7 @@ int getop(double *d)
 	}
 	else if(sscanf(bufp, "%s", op) == 1)
 	{
+		bufp = findnxtstart(bufp);
 		int l = strlen(op);
 		//bufp += l; /* speed optimization to save */
 		if(l == 1)
@@ -33,7 +34,7 @@ int getop(double *d)
 			char *oploc;
 			/* will be null pointer if not found */
 			oploc = strchr("+-*/%?!@", (int)op[0]);
-			if(oploc == NULL)
+			if(oploc != NULL)
 				return op[0];
 			else if(op[0] >= 'a' && op[0] <= 'z')
 			{
@@ -43,6 +44,9 @@ int getop(double *d)
 						op[0] == '=')
 				{
 					cust_var[var - 'a'] = *d;
+					/* run twice to get over '=' and num */
+					bufp = findnxtstart(bufp);
+					bufp = findnxtstart(bufp);
 					return NUMBER;
 				}
 				else
@@ -80,7 +84,6 @@ int getop(double *d)
 		else if(strcmp(op, "abs"))
 			return ABS;
 
-		bufp = findnxtstart(bufp);
 		/* TODO: do comparisons like to check for operators,
 		 * functions, setting a variable, recalling, etc. and return
 		 * appropriate */
