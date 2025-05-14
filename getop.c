@@ -17,16 +17,16 @@ int getop(double *d)
 	if(buf[0] == '\0')
 		getaline(buf, MXBUF);
 	
-	if(sscanf(bufp, "%lf", d))
+	if(sscanf(bufp, "%lf", d) == 1)
 	{
 		bufp = findnxtstart(bufp);
 		return NUMBER;
 	}
-	else if(sscanf(bufp, "%s", op))
+	else if(sscanf(bufp, "%s", op) == 1)
 	{
 		bufp = findnxtstart(bufp);
 		int l = strlen(op);
-		bufp += l; /* speed optimization to save */
+		//bufp += l; /* speed optimization to save */
 		if(l == 1)
 		{
 			switch(op[0])
@@ -74,10 +74,11 @@ int getop(double *d)
 		 * functions, setting a variable, recalling, etc. and return
 		 * appropriate */
 	}
-	else if(bufp[-1] == '\n')
+	else if(bufp[0] == '\n')
 	{
-		/* we've reaced the end time for next one */
-		getaline(buf, MXBUF);
+		/* we've reached the end. This will make getline run next time */
+		buf[0] = '\0';
+		bufp = buf; /* reset buffer pointer to beginning of buf */
 		return '\n';
 	}
 	else if(bufp[0] == '\0')
@@ -96,11 +97,11 @@ int getop(double *d)
 /* findnxtstart: finds next start position of a func/num/operator */
 static char *findnxtstart(char *pos)
 {
-	while(isspace(*pos) && *pos != '\0')
+	while(isspace(*pos) && *pos != '\n')
 		pos++;
-	while(!isspace(*pos) && *pos != '\0')
+	while(!isspace(*pos) && *pos != '\n')
 		pos++;
-	while(isspace(*pos) && *pos != '\0')
+	while(isspace(*pos) && *pos != '\n')
 		pos++;
 	return pos;
 }
