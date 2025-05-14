@@ -17,14 +17,14 @@ int getop(double *d)
 	if(buf[0] == '\0')
 		getaline(buf, MXBUF);
 	
-	if(sscanf("%lf", d))
+	if(sscanf(bufp, "%lf", d))
 	{
-		getnxtstart(bufp);
+		bufp = findnxtstart(bufp);
 		return NUMBER;
 	}
-	else if(sscanf("%s", op))
+	else if(sscanf(bufp, "%s", op))
 	{
-		getnxtstart(bufp);
+		bufp = findnxtstart(bufp);
 		int l = strlen(op);
 		bufp += l; /* speed optimization to save */
 		if(l == 1)
@@ -90,15 +90,7 @@ int getop(double *d)
 		/* TODO: some error handling */
 		printf("Error");
 	}
-	
-	/* code for detecting and triggering '\n' feed back to main */
-	int i;
-	for(i = 0; isspace(buf[i]) && buf[i] != '\0'; i++)
-		;
-	if(buf[i-1] == '\n')
-		return '\n';
-
-	//if(sscanf("%c", c)
+	return UNKNOWN;
 }
 
 /* findnxtstart: finds next start position of a func/num/operator */
