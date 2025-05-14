@@ -9,7 +9,7 @@ int cust_var[CUSTVARMAX];
 /* reverse Polish calculator */
 int main()
 {
-	enum OpType curtype, prevtype;
+	int curtype, prevtype;
 	prevtype = NONE;
 	double op2;
 	char s[MAXOP];
