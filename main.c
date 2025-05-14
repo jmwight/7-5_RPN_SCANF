@@ -4,7 +4,7 @@
 #include <math.h> // math functions like sin, sqrt, log etc.
 #include <string.h> // for strlen
 
-int cust_var[CUSTVARMAX];
+double cust_var[CUSTVARMAX];
 
 /* reverse Polish calculator */
 int main()

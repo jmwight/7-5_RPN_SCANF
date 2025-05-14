@@ -23,7 +23,7 @@ extern void ungetch(int);
 extern void ungets(char*);
 
 /* global custom variables a-z user can set */
-extern int cust_var[/*CUSTVARMAX*/];
+extern double cust_var[/*CUSTVARMAX*/];
 
 #include "readwritelines/getaline.h"
 
