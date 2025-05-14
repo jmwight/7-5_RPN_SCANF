@@ -1,4 +1,4 @@
-OBJ = main.o getch.o getop.o stack.o
+OBJ = main.o getch.o getop.o stack.o readwritelines/getaline.o
 CC = gcc
 ARGS = -Wall
 LIBS = -lm # standard libraries for linking final program
@@ -18,6 +18,10 @@ getop.o: getop.c calc.h
 
 stack.o: stack.c calc.h
 	$(CC) $(ARGS) $(DEBUG) -c stack.c
+
+.PHONY: readwritelinesdir
+readwritelinesdir:
+	$(MAKE) -C readwritelines
 	
 .PHONY: clean
 clean:
