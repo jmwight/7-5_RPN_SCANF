@@ -5,7 +5,8 @@
 #include <stdio.h>
 
 #define MXBUF	120
-#define MXOP	5
+
+static char *findnxtstart(char *pos);
 
 /* getop: get next operator or numeric operand */
 int getop(double *d)
@@ -17,8 +18,10 @@ int getop(double *d)
 		getaline(buf, MXBUF);
 	
 	if(sscanf("%lf", d))
+	{
 		getnxtstart(bufp);
 		return NUMBER;
+	}
 	else if(sscanf("%s", op))
 	{
 		getnxtstart(bufp);
@@ -78,8 +81,10 @@ int getop(double *d)
 		return '\n';
 	}
 	else if(bufp[0] == '\0')
+	{
 		if(getaline(buf, MXBUF) == EOF)
 			return EOF;
+	}
 	else
 	{
 		/* TODO: some error handling */
@@ -97,7 +102,7 @@ int getop(double *d)
 }
 
 /* findnxtstart: finds next start position of a func/num/operator */
-char *findnxtstart(char *pos)
+static char *findnxtstart(char *pos)
 {
 	while(isspace(*pos) && *pos != '\0')
 		pos++;
