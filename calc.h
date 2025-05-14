@@ -6,7 +6,9 @@
 /* start at 256 to ensure not conflicting with ascii or ascii extended
  * character set */
 enum OpType { NONE = 256, NUMBER, VAR, SIN, COS, TAN, ASIN, ACOS, ATAN, EXP,
-	LOG, SQRT, CEIL, FLOOR, ABS, CUSTVARMAX, UNKNOWN };
+	LOG, SQRT, CEIL, FLOOR, ABS, UNKNOWN };
+
+#define CUSTVARMAX	26
 
 /* function definitions */
 extern int getop(double*);
