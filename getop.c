@@ -26,7 +26,6 @@ int getop(double *d)
 	{
 		bufp = findnxtstart(bufp);
 		int l = strlen(op);
-		//bufp += l; /* speed optimization to save */
 		if(l == 1)
 		{
 			/* test if math / general calculator operator and if so
@@ -83,10 +82,6 @@ int getop(double *d)
 			return FLOOR;
 		else if(strcmp(op, "abs"))
 			return ABS;
-
-		/* TODO: do comparisons like to check for operators,
-		 * functions, setting a variable, recalling, etc. and return
-		 * appropriate */
 	}
 	else if(bufp[0] == '\n')
 	{
@@ -102,8 +97,8 @@ int getop(double *d)
 	}
 	else
 	{
-		/* TODO: some error handling */
-		printf("Error");
+		printf("Error: invalid input!\n");
+		return EOF;
 	}
 	return UNKNOWN;
 }
