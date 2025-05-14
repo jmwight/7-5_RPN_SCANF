@@ -11,15 +11,14 @@ int main()
 {
 	int curtype, prevtype;
 	prevtype = NONE;
-	double op2;
-	char s[MAXOP];
+	double op, op2;
 
-	while((curtype = getop(s)) != EOF)
+	while((curtype = getop(&op)) != EOF)
 	{
 		switch(curtype)
 		{
 		case NUMBER:
-			push(atof(s));
+			push(op);
 			break;
 		case '+':
 			push(pop() + pop());
@@ -102,11 +101,14 @@ int main()
 		case ABS:
 			push(fabs(pop()));
 			break;
-		/* set a custom variable */
-		case VAR:
-			/* the last character is the char, all characters are the double. atof ignores the last char which isn't a number */
-			cust_var[s[strlen(s) - 1] - 'a'] = atof(s);
+		case UNKNOWN:
+			printf("Unknown command or variable\n");
 			break;
+		/* set a custom variable */
+		//case VAR: FIXME: NEED TO IMPLEMENT THIS LATER 
+			/* the last character is the char, all characters are the double. atof ignores the last char which isn't a number */
+			//cust_var[s[strlen(s) - 1] - 'a'] = atof(s);
+			//break;
 		/* replacing variables with numbers in the stack */
 		case 'a':
 			push(cust_var['a' - 'a']);
@@ -188,7 +190,7 @@ int main()
 			break;
 
 		default:
-			printf("error: unknown command \"%s\"\n", s);
+			printf("error: unknown error\n");
 			break;
 		}
 		/* this is a variable to keep track if enter got hit twice so we only print calculated
